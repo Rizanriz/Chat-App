@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import authroute from "./src/routes/auth.routes.js"
+import authroutes from "./src/routes/auth.routes.js"
+import messageRoutes from './src/routes/message.routes.js';
 import { connectDB } from './src/lib/db.js';
 import cookieParser from 'cookie-parser';
 
@@ -12,7 +13,8 @@ app.use(express.json());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/auth",authroute);
+app.use("/api/auth",authroutes);
+app.use("/api/message",messageRoutes);
 
 const port = process.env.PORT || 5000
 
