@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
-import {Eye,EyeOff,Loader2,Lock,Mail} from "lucide-react" 
+import {Eye,EyeOff,Loader2,Lock,Mail, MessageSquare, User} from "lucide-react" 
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import AuthImagePattern from '../components/AuthImagePattern';
@@ -44,7 +44,7 @@ const SignupPage = () => {
                 className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
               group-hover:bg-primary/20 transition-colors"
               >
-                {/* <MessageSquare className="size-6 text-primary" /> */}
+                <MessageSquare className="size-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
               <p className="text-base-content/60">Get started with your free account</p>
@@ -58,7 +58,7 @@ const SignupPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  {/* <User className="size-5 text-base-content/40" /> */}
+                  <User className="size-5 text-base-content/40" />
                 </div>
                 <input
                   type="text"
