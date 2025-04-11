@@ -9,10 +9,11 @@ export const useAuthStore = create((set) => ({
     isLoggingIn: false,
     isUpdatingProfile: false,
     isCheckingAuth: true,   
+    onlineUsers: [],
 
     checkAuth: async () => {
         try {
-            const res = await axiosInstance.get("auth/check")
+            const res = await axiosInstance.get("/auth/check")
             set({ authUser: res.data })
         } catch (error) {
             console.log("Error in checkAuth", error);
@@ -25,7 +26,7 @@ export const useAuthStore = create((set) => ({
     signup:async (data,navigate) => {
         set({isSigningUp:true})
         try {
-            const res = await axiosInstance.post("auth/signup",data)    
+            const res = await axiosInstance.post("/auth/signup",data)    
             console.log(res.data);
             set({ authUser: res.data })
             toast.success("Account created successfully ")
@@ -40,7 +41,7 @@ export const useAuthStore = create((set) => ({
 
     logout:async()=> {
         try {
-            await axiosInstance.post("auth/logout")
+            await axiosInstance.post("/auth/logout")
             set({ authUser: null })
             toast.success("Logged out successfully ")
         } catch (error) {
@@ -52,7 +53,7 @@ export const useAuthStore = create((set) => ({
     login:async(data)=>{
         set({isLogging:true})
         try {
-            const res = await axiosInstance.post("auth/login",data)
+            const res = await axiosInstance.post("/auth/login",data)
             set({ authUser: res.data })
             toast.success("Logged in successfully")
         } catch (error) {
@@ -66,7 +67,7 @@ export const useAuthStore = create((set) => ({
     updateProfile:async(data)=>{
         set({isUpdatingProfile:true})
         try {
-            const res = await axiosInstance.put("auth/update-profile",data)
+            const res = await axiosInstance.put("/auth/update-profile",data)
             set({ authUser: res.data })
             toast.success("Profile updated successfully")
         } catch (error) {

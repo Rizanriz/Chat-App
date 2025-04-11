@@ -18,7 +18,7 @@ app.use(cors({
 }));
 
 app.use("/api/auth",authroutes);
-app.use("/api/message",messageRoutes);
+app.use("/api/messages",messageRoutes);
 
 const port = process.env.PORT || 5000
 
