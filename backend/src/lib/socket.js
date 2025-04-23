@@ -7,8 +7,31 @@ const server = http.createServer(app)
 
 const io = new Server(server, {
     cors: {
-        orgin: ["http://localhost:5173"]
+        origin: ["http://localhost:5173"]
     }
+})
+
+export function getReceiverSocketId(userId){
+    return userSocketMap[userId]
+}
+
+//used to store online users
+const userSocketMap = {}
+
+io.on("connection", (socket) => {           
+    console.log("Connected to socket.io", socket.id);
+
+const userId = socket.handshake.query.userId
+if (userId) userSocketMap[userId] = socket.id
+
+//io.emit is used to send event to all connected users
+io.emit("getOnlineUsers", Object.keys(userSocketMap))
+
+socket.on("disconnect", () => {
+    console.log("Disconnected from socket.io", socket.id);
+    delete userSocketMap[socket.id]
+    io.emit("getOnlineUsers", Object.keys(userSocketMap))
+})
 })
 
 export { io, app, server } 
