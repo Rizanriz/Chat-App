@@ -1,12 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import authroutes from "./src/routes/auth.routes.js"
-import messageRoutes from './src/routes/message.routes.js';
-import { connectDB } from './src/lib/db.js';
+import authroutes from "./routes/auth.routes.js"
+import messageRoutes from './routes/message.routes.js';
+import { connectDB } from './lib/db.js';
 import cookieParser from 'cookie-parser';
 import cors from "cors"
 import path from "path"
-import {app,server} from "./src/lib/socket.js"
+import {app,server} from "./lib/socket.js"
 
 dotenv.config()
 
@@ -25,12 +25,12 @@ app.use("/api/auth",authroutes);
 app.use("/api/messages",messageRoutes);
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "frontend/dist")));
-  
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-    });
-  }
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 
 server.listen(port,()=>{
     console.log(`Server is running on port ${port}`)
