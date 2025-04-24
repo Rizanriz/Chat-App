@@ -58,7 +58,7 @@ export const useAuthStore = create((set, get) => ({
     },
 
     login: async (data) => {
-        set({ isLogging: true })
+        set({ isLoggingIn: true })
         try {
             const res = await axiosInstance.post("/auth/login", data)
             set({ authUser: res.data })
@@ -69,7 +69,7 @@ export const useAuthStore = create((set, get) => ({
             console.log(error);
             toast.error("Invalid credentials")
         } finally {
-            set({ isLogging: false })
+            set({ isLoggingIn: false })
         }
     },
 
